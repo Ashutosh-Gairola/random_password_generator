@@ -18,7 +18,7 @@ jobs:
           python-version: '3.x'
 
       - name: Run script
-        run: python generate_number.py
+        run: python test.py
 
       - name: Commit and push changes
         run: |
