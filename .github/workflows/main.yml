@@ -1,4 +1,4 @@
-name: Generate Number
+name: MAIN Generate Number
 
 on:
   schedule:
