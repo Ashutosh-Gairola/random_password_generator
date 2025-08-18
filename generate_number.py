@@ -31,6 +31,6 @@ with open(f"{repo_dir}/numbers.txt", "a") as f:
 
 # Git commands
 
-subprocess.run(["git", "-C", repo_dir, "add", "numbers.txt"])
+subprocess.run(["git", "-C", repo_dir, "add", "-A"])
 subprocess.run(["git", "-C", repo_dir, "commit", "-m", f"Add number {number} at {timestamp}"])
 subprocess.run(["git", "-C", repo_dir, "push"])
