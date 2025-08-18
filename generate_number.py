@@ -1,5 +1,7 @@
 import random
 import subprocess
+import os
+import shutil
 from datetime import datetime
 import logging
 
@@ -10,27 +12,49 @@ log_file = f"{repo_dir}/script.log"
 logging.basicConfig(
     filename=log_file,
     level=logging.INFO,
-    format='%(asctime)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
+    format="%(asctime)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
 )
 
-# Log the last run date
-logging.info("Script executed.")
+# Marker file to track whether to create or delete
+marker_file = os.path.join(repo_dir, ".toggle_state")
 
-# Generate random number between 32-bit and 64-bit range
-number = random.randint(2**31, 2**63 - 1)
-logging.info(f"Generated number: {number}")
+# Determine action
+if not os.path.exists(marker_file):
+    action = "create"
+else:
+    with open(marker_file, "r") as f:
+        last_action = f.read().strip()
+    action = "delete" if last_action == "create" else "create"
 
-# Current timestamp in ISO format
-timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-logging.info(f"Current timestamp: {timestamp}")
+logging.info(f"Script executed. Action: {action}")
 
-# Append to file
-with open(f"{repo_dir}/numbers.txt", "a") as f:
-    f.write(f"by pc {timestamp} - {number}\n")
+# Perform action
+if action == "create":
+    for i in range(1, 25):  # 1 to 24
+        folder = os.path.join(repo_dir, f"folder_{i}")
+        os.makedirs(folder, exist_ok=True)
+        file_path = os.path.join(folder, "text-1")
+
+        number = random.randint(2**31, 2**63 - 1)
+        with open(file_path, "w") as f:
+            f.write(f"{number}\n")
+
+        logging.info(f"Created {file_path} with number {number}")
+
+elif action == "delete":
+    for i in range(1, 25):
+        folder = os.path.join(repo_dir, f"folder_{i}")
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
+            logging.info(f"Deleted {folder}")
+
+# Save new state
+with open(marker_file, "w") as f:
+    f.write(action)
 
 # Git commands
-
 subprocess.run(["git", "-C", repo_dir, "add", "-A"])
-subprocess.run(["git", "-C", repo_dir, "commit", "-m", f"Add number {number} at {timestamp}"])
+commit_msg = f"{action.capitalize()} folders at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg])
 subprocess.run(["git", "-C", repo_dir, "push"])
