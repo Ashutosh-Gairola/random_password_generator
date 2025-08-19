@@ -48,8 +48,8 @@ if action == "create":
         with open(file_path, "w") as f:
             f.write(f"{number}\n")
 
-        if i <= 5 or i == folder_count:  # log only first 5 and last
-            logging.info(f"Created {file_path} with number {number}")
+        # if i <= 5 or i == folder_count:  # log only first 5 and last
+            # logging.info(f"Created {file_path} with number {number}")
 
     # Save state with count
     with open(marker_file, "w") as f:
