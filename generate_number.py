@@ -70,9 +70,9 @@ elif action == "delete":
 
 # Git commit/push
 subprocess.run(["git", "-C", repo_dir, "add", "-A"])
-time.sleep(1)  # Ensure timestamp is different
+time.sleep(10)  # Ensure timestamp is different
 commit_msg = f"{action.capitalize()} folders at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
-time.sleep(1)  # Ensure timestamp is different
+time.sleep(11)  # Ensure timestamp is different
 subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg])
-time.sleep(2)  # Ensure timestamp is different
+time.sleep(12)  # Ensure timestamp is different
 subprocess.run(["git", "-C", repo_dir, "push"])
