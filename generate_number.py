@@ -36,7 +36,7 @@ logging.info(f"Script executed. Action: {action}")
 if action == "create":
     # Pick random number of folders between 1 and 10,000
     folder_count = random.randint(1, 10_000)
-    logging.info(f"Creating {folder_count} folders")
+    # logging.info(f"Creating {folder_count} folders")
 
     for i in range(1, folder_count + 1):
         folder = os.path.join(repo_dir, f"folder_{i}")
@@ -56,7 +56,7 @@ if action == "create":
         f.write(f"create,{folder_count}")
 
 elif action == "delete":
-    logging.info(f"Deleting {last_count} folders")
+    # logging.info(f"Deleting {last_count} folders")
     for i in range(1, last_count + 1):
         folder = os.path.join(repo_dir, f"folder_{i}")
         if os.path.exists(folder):
