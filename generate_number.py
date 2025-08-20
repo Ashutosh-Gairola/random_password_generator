@@ -61,8 +61,8 @@ elif action == "delete":
         folder = os.path.join(repo_dir, f"folder_{i}")
         if os.path.exists(folder):
             shutil.rmtree(folder)
-            if i <= 5 or i == last_count:
-                logging.info(f"Deleted {folder}")
+            # if i <= 5 or i == last_count:
+            #     logging.info(f"Deleted {folder}")
 
     # Save state with count=0
     with open(marker_file, "w") as f:
