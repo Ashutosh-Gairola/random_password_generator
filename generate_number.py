@@ -5,11 +5,12 @@ import shutil
 from datetime import datetime
 import logging
 import time
+from pytz import timezone
 
 repo_dir = "/home/ashu/Project/main_acc/random_password_generator"
 
 # Configure logging
-log_file = f"{repo_dir}/script.log"
+log_file = f"{repo_dir}/cron.log"
 logging.basicConfig(
     filename=log_file,
     level=logging.INFO,
@@ -71,7 +72,8 @@ elif action == "delete":
 # Git commit/push
 subprocess.run(["git", "-C", repo_dir, "add", "-A"])
 time.sleep(10)  # Ensure timestamp is different
-commit_msg = f"{action.capitalize()} folders at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+ist = timezone('Asia/Kolkata')
+commit_msg = f"{action.capitalize()} folders at {datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S')}"
 time.sleep(11)  # Ensure timestamp is different
 subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg])
 time.sleep(12)  # Ensure timestamp is different
