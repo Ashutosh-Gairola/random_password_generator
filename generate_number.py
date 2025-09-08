@@ -35,7 +35,7 @@ else:
 
 if action == "create":
     # Pick random number of folders between 1 and 10,000
-    folder_count = random.randint(1, 10_000)
+    folder_count = random.randint(1, 10)
     # logging.info(f"Creating {folder_count} folders")
 
     for i in range(1, folder_count + 1):
