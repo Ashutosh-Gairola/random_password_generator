@@ -32,7 +32,6 @@ else:
     last_count = int(content[1]) if len(content) > 1 else 0
     action = "delete" if last_action == "create" else "create"
 
-logging.info(f"Script executed. Action: {action}")
 
 if action == "create":
     # Pick random number of folders between 1 and 10,000
@@ -71,11 +70,11 @@ elif action == "delete":
 
 # Git commit/push
 subprocess.run(["git", "-C", repo_dir, "add", "-A"])
-time.sleep(10)  # Ensure timestamp is different
+time.sleep(15)  # Ensure timestamp is different
 ist = timezone('Asia/Kolkata')
 commit_msg = f"{action.capitalize()} folders at {datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S')}"
-time.sleep(11)  # Ensure timestamp is different
+time.sleep(16)  # Ensure timestamp is different
 subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg])
-time.sleep(12)  # Ensure timestamp is different
+time.sleep(17)  # Ensure timestamp is different
 subprocess.run(["git", "-C", repo_dir, "push"])
 logging.info(f"{commit_msg}")
