@@ -78,3 +78,4 @@ subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg])
 time.sleep(17)  # Ensure timestamp is different
 subprocess.run(["git", "-C", repo_dir, "push"])
 logging.info(f"{commit_msg}")
+print("done")
