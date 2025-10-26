@@ -7,10 +7,10 @@ import logging
 import time
 from pytz import timezone
 
-repo_dir = "/home/ashu/Project/main_acc/random_password_generator"
+repo_dir = os.getcwd()  # use current working directory
 
 # Configure logging
-log_file = f"{repo_dir}/cron.log"
+log_file = os.path.join(repo_dir, "script.log")
 logging.basicConfig(
     filename=log_file,
     level=logging.INFO,
